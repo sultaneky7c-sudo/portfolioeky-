@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b12">
+<title>Portfolio — Sultan Eky Syahrudin</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#09090f;
+  --panel:rgba(18,18,29,.68);
+  --panel2:rgba(255,255,255,.055);
+  --text:#f6f5fb;
+  --muted:#a7a4b5;
+  --purple:#9b7cff;
+  --pink:#ff6fb5;
+  --cyan:#65e8ff;
+  --lime:#b8f36b;
+  --line:rgba(255,255,255,.1);
+  --shadow:0 25px 80px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Manrope",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+  isolation:isolate;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:-35vmax;
+  width:170vmax;
+  height:170vmax;
+  pointer-events:none;
+  z-index:-3;
+  background:
+    radial-gradient(circle at 15% 50%,
+      rgba(155,124,255,.42) 0%,
+      rgba(155,124,255,.25) 5%,
+      rgba(155,124,255,.09) 13%,
+      transparent 27%),
+    radial-gradient(circle at 85% 50%,
+      rgba(101,232,255,.38) 0%,
+      rgba(101,232,255,.23) 5%,
+      rgba(101,232,255,.08) 13%,
+      transparent 27%);
+  filter:blur(30px);
+  opacity:1;
+  transform-origin:50% 50%;
+  animation:ambientLights 42s linear infinite;
+}
+body:after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+  background:
+    radial-gradient(circle at 50% 50%,transparent 0 42%,rgba(9,9,15,.12) 72%,rgba(9,9,15,.45) 100%),
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:auto,40px 40px,40px 40px;
+}
+@keyframes ambientLights{
+  0%{transform:rotate(0deg) scale(1)}
+  25%{transform:rotate(90deg) scale(1.035)}
+  50%{transform:rotate(180deg) scale(1)}
+  75%{transform:rotate(270deg) scale(1.035)}
+  100%{transform:rotate(360deg) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  body:before{animation:none}
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.container{width:min(1160px,calc(100% - 36px));margin:auto}
+.mono{font-family:"DM Mono",monospace}
+.gradient{
+  background:linear-gradient(100deg,var(--purple),var(--pink),var(--cyan));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.nav{
+  position:fixed;z-index:50;top:18px;left:50%;transform:translateX(-50%);
+  width:min(1080px,calc(100% - 28px));
+  padding:12px 15px;
+  border:1px solid var(--line);
+  background:rgba(10,10,17,.72);
+  backdrop-filter:blur(22px);
+  border-radius:22px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 15px 45px rgba(0,0,0,.22);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800}
+.brand-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--cyan));box-shadow:0 0 18px var(--pink)}
+.nav-links{display:flex;gap:8px}
+.nav-links a{font-size:13px;color:var(--muted);padding:9px 12px;border-radius:12px}
+.nav-links a:hover{background:var(--panel2);color:var(--text)}
+.hero{min-height:100vh;display:grid;place-items:center;padding:130px 0 70px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:55px;align-items:center}
+.kicker{color:var(--cyan);font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px}
+h1{font-size:clamp(48px,8vw,98px);line-height:.92;letter-spacing:-.07em}
+.hero-copy{max-width:680px}
+.hero-copy p{margin-top:25px;color:var(--muted);font-size:17px;line-height:1.8;max-width:650px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  border:1px solid var(--line);border-radius:15px;padding:12px 17px;
+  background:rgba(255,255,255,.045);color:var(--text);cursor:pointer;
+  transition:.25s ease;
+}
+.btn:hover{transform:translateY(-2px);border-color:rgba(155,124,255,.55)}
+.btn.primary{background:linear-gradient(135deg,rgba(155,124,255,.22),rgba(255,111,181,.14));border-color:rgba(155,124,255,.5)}
+.hero-side{display:flex;justify-content:center}
+.touch-photo{
+  width:min(410px,100%);aspect-ratio:4/5;position:relative;overflow:hidden;
+  border-radius:32px;border:1px solid rgba(255,255,255,.14);
+  box-shadow:var(--shadow);cursor:ew-resize;touch-action:none;
+  background:#151520;
+}
+.touch-photo .photo{position:absolute;inset:0;background-position:center;background-size:cover}
+.photo-back{background-image:url("images/hlw.png")}
+.photo-front{background-image:url("images/ky.png");clip-path:inset(0 0 0 0)}
+.photo-shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.6))}
+.photo-label{
+  position:absolute;left:18px;bottom:18px;right:18px;
+  display:flex;justify-content:space-between;align-items:end;gap:10px;
+  z-index:3
+}
+.photo-label span{font-size:11px;color:#fff8;letter-spacing:.14em;text-transform:uppercase}
+.photo-hint{
+  position:absolute;top:18px;left:50%;transform:translateX(-50%);
+  padding:8px 11px;border-radius:99px;background:rgba(0,0,0,.48);
+  border:1px solid rgba(255,255,255,.12);font-size:11px;z-index:4;
+  white-space:nowrap;transition:.3s
+}
+.touch-photo.used .photo-hint{opacity:.15}
+section{padding:110px 0}
+.section-head{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:32px}
+.eyebrow{font-family:"DM Mono";font-size:11px;color:var(--cyan);letter-spacing:.16em;text-transform:uppercase;margin-bottom:9px}
+h2{font-size:clamp(30px,5vw,56px);letter-spacing:-.05em}
+.section-head p{color:var(--muted);max-width:480px;line-height:1.7}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:26px;
+  padding:27px;box-shadow:0 18px 60px rgba(0,0,0,.16);backdrop-filter:blur(16px)
+}
+.card p{color:var(--muted);line-height:1.85}
+.info-list{display:grid;gap:13px;margin-top:20px}
+.info-row{display:flex;justify-content:space-between;gap:20px;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:14px}
+.info-row span:first-child{color:#777485}.info-row span:last-child{text-align:right}
+.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.skill{padding:20px;border-radius:20px;border:1px solid var(--line);background:var(--panel2)}
+.skill strong{display:block;margin-bottom:7px}.skill small{color:var(--muted)}
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.project{
+  border:1px solid var(--line);border-radius:27px;overflow:hidden;background:var(--panel);
+  transition:.3s;cursor:pointer
+}
+.project:hover{transform:translateY(-5px);border-color:rgba(155,124,255,.5)}
+.project-img{height:310px;overflow:hidden;background:#14141e}
+.project-img img{width:100%;height:100%;object-fit:cover;display:block;transition:.55s}
+.project:hover img{transform:scale(1.04)}
+.project-body{padding:21px}
+.project-top{display:flex;justify-content:space-between;gap:15px}
+.project h3{font-size:22px}.project p{color:var(--muted);line-height:1.65;margin-top:9px;font-size:14px}
+.tag{font-family:"DM Mono";font-size:10px;color:var(--cyan);border:1px solid rgba(101,232,255,.25);padding:6px 8px;border-radius:99px;white-space:nowrap}
+.project-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.pill{font-size:11px;color:#c5c2ce;background:rgba(255,255,255,.045);padding:7px 9px;border-radius:99px}
+.project-detail-btn{
+  width:100%;
+  margin-top:20px;
+  padding:12px 15px;
+  border:1px solid rgba(155,124,255,.34);
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(155,124,255,.12),rgba(255,111,181,.07));
+  color:#f6f5fb;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.02em;
+  transition:.25s ease;
+}
+.project-detail-btn span:last-child{
+  color:var(--cyan);
+  font-size:16px;
+  transition:.25s ease;
+}
+.project:hover .project-detail-btn{
+  border-color:rgba(155,124,255,.7);
+  background:linear-gradient(135deg,rgba(155,124,255,.2),rgba(255,111,181,.1));
+}
+.project:hover .project-detail-btn span:last-child{
+  transform:translateX(4px);
+}
+
+.timeline{position:relative;max-width:850px;margin:auto}
+.timeline:before{content:"";position:absolute;left:8px;top:0;bottom:0;width:1px;background:var(--line)}
+.t-item{position:relative;padding-left:38px;margin-bottom:34px}
+.t-dot{position:absolute;left:2px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--purple);box-shadow:0 0 18px rgba(155,124,255,.8)}
+.t-item h3{font-size:18px}.t-item .date{font-family:"DM Mono";font-size:11px;color:var(--cyan);margin:5px 0 10px}.t-item p{color:var(--muted);line-height:1.75}
+.contact-box{
+  display:grid;grid-template-columns:1fr auto;gap:25px;align-items:center;
+  border:1px solid var(--line);background:linear-gradient(135deg,rgba(155,124,255,.1),rgba(101,232,255,.05));
+  padding:34px;border-radius:28px
+}
+.contact-box p{color:var(--muted);margin-top:8px}
+.contact-links{display:flex;flex-wrap:wrap;gap:9px}
+footer{padding:30px 0 55px;color:#777485;font-size:12px;text-align:center}
+.modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(16px);
+  z-index:100;display:none;padding:25px;overflow:auto
+}
+.modal.open{display:flex;align-items:center;justify-content:center}
+.modal-card{
+  width:min(1000px,100%);max-height:90vh;overflow:auto;background:#11111a;
+  border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow)
+}
+.modal-top{display:flex;justify-content:space-between;gap:15px;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.modal-top button{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:12px;padding:8px 12px;cursor:pointer}
+.modal-content{padding:24px}.modal-content p{color:var(--muted);line-height:1.8}
+.modal-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
+.modal-gallery img{width:100%;border-radius:16px;border:1px solid var(--line);display:block}
+.modal-back{margin-top:22px;width:100%;justify-content:center}
+@media(max-width:850px){
+  .hero-grid,.about-grid{grid-template-columns:1fr}
+  .hero-side{order:-1}.hero{padding-top:120px}
+  .skills{grid-template-columns:repeat(2,1fr)}
+  .projects{grid-template-columns:1fr}
+  .contact-box{grid-template-columns:1fr}
+  .section-head{display:block}.section-head p{margin-top:12px}
+}
+@media(max-width:560px){
+  .container{width:min(100% - 24px,1160px)}
+  .nav-links{display:none}
+  h1{font-size:55px}
+  section{padding:80px 0}
+  .touch-photo{width:100%;aspect-ratio:4/5}
+  .skills{grid-template-columns:1fr 1fr}
+  .modal{padding:10px}.modal-gallery{grid-template-columns:1fr}
+}
+.reveal{opacity:0;transform:translateY(22px);transition:.7s ease}.reveal.show{opacity:1;transform:none}
+<style>
+/* Ambient glow: dua cahaya lembut di kiri dan kanan, bergerak 360° perlahan. */
+.ambient-light{
+  position:fixed;
+  width:42vmax;
+  height:42vmax;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:-1;
+  filter:blur(65px);
+  opacity:.23;
+  mix-blend-mode:screen;
+}
+.ambient-light.left{
+  left:-28vmax;
+  top:8vh;
+  background:radial-gradient(circle,rgba(155,124,255,1) 0%,rgba(155,124,255,.62) 22%,transparent 68%);
+  animation:lightOrbitLeft 50s linear infinite;
+}
+.ambient-light.right{
+  right:-28vmax;
+  top:18vh;
+  background:radial-gradient(circle,rgba(101,232,255,1) 0%,rgba(101,232,255,.55) 22%,transparent 68%);
+  animation:lightOrbitRight 58s linear infinite reverse;
+}
+@keyframes lightOrbitLeft{
+  0%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+  25%{transform:translate3d(8vw,4vh,0) rotate(90deg) scale(1.05)}
+  50%{transform:translate3d(14vw,0,0) rotate(180deg) scale(1)}
+  75%{transform:translate3d(6vw,-4vh,0) rotate(270deg) scale(1.05)}
+  100%{transform:translate3d(0,0,0) rotate(360deg) scale(1)}
+}
+@keyframes lightOrbitRight{
+  0%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+  25%{transform:translate3d(-8vw,3vh,0) rotate(90deg) scale(1.04)}
+  50%{transform:translate3d(-14vw,0,0) rotate(180deg) scale(1)}
+  75%{transform:translate3d(-6vw,-3vh,0) rotate(270deg) scale(1.04)}
+  100%{transform:translate3d(0,0,0) rotate(360deg) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  .ambient-light.left,.ambient-light.right{animation:none}
+}
+</style>
+</style>
+</head>
+
+<body>
+<div class="ambient-light left" aria-hidden="true"></div>
+<div class="ambient-light right" aria-hidden="true"></div>
+<nav class="nav">
+  <a class="brand" href="#home"><span class="brand-dot"></span>Portfolio 2026<span class="mono" style="color:#777485;font-size:11px"></span></a>
+  <div class="nav-links">
+    <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <div class="kicker">Graphic Designer</div>
+      <h1>Sultan Eky <span class="gradient">Syahrudin.</span></h1>
+      <p>Saya siswa DKV yang tertarik pada branding, poster, vector, layout, dan visual digital. Portfolio ini berisi beberapa karya yang saya kerjakan selama proses belajar dan pengembangan kemampuan desain.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#projects">Lihat Projects ↗</a>
+        <a class="btn" href="#contact">Hubungi Saya</a>
+      </div>
+    </div>
+
+    <div class="hero-side reveal">
+      <!-- ================================
+           FOTO SWAP / DRAG
+           FOTO DEPAN  = ky.png
+           FOTO BELAKANG = hlw.png
+           Ganti nama file di CSS jika ingin mengganti fotonya.
+           ================================ -->
+      <div class="touch-photo" id="touchPhoto" aria-label="Foto interaktif">
+        <div class="photo photo-back"></div>
+        <div class="photo photo-front" id="photoFront"></div>
+        <div class="photo-shade"></div>
+        <div class="photo-hint">←→</div>
+        <div class="photo-label">
+          <div>
+            <span>Hello</span>
+            <div style="font-size:18px;font-weight:800;margin-top:3px">I'm ready to work</div>
+          </div>
+          <span>2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+<div class="container">
+  <div class="section-head reveal">
+    <div><div class="eyebrow">01 — About</div><h2>Tentang Saya</h2></div>
+    <p>Ruang singkat untuk mengenal saya, bidang yang saya pelajari, dan arah visual yang saya sukai.</p>
+  </div>
+  <div class="about-grid">
+    <div class="card reveal">
+      <p>Saya <b>Sultan Eky Syahrudin</b>, siswa SMKN 5 Jember jurusan Desain Komunikasi Visual. Saya senang mengembangkan ide menjadi visual yang sederhana, kuat, dan mudah dipahami.</p>
+      <div class="info-list">
+        <div class="info-row"><span>Nama</span><span>Sultan Eky Syahrudin</span></div>
+        <div class="info-row"><span>Sekolah</span><span>SMKN 5 Jember</span></div>
+        <div class="info-row"><span>Jurusan</span><span>XII DKV</span></div>
+        <div class="info-row"><span>Fokus</span><span>Graphic Design</span></div>
+      </div>
+    </div>
+    <div class="card reveal">
+      <div class="eyebrow">Visual Direction</div>
+      <h3 style="font-size:28px;margin-bottom:12px">Clean, Bold, Modern</h3>
+      <p>Saya menyukai perpaduan layout yang rapi, tipografi yang kuat, warna kontras, serta tampilan digital yang terasa modern dan tetap komunikatif.</p>
+      <div class="project-meta" style="margin-top:22px">
+        <span class="pill">Branding</span><span class="pill">Poster</span><span class="pill">Vector</span><span class="pill">Layout</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="skills">
+<div class="container">
+  <div class="section-head reveal">
+    <div><div class="eyebrow">02 — Skills</div><h2>Skills & Tools</h2></div>
+  </div>
+  <div class="skills">
+    <div class="skill reveal"><strong>Prototype</strong><small>UI / visual flow</small></div>
+    <div class="skill reveal"><strong>Layout</strong><small>Composition & grid</small></div>
+    <div class="skill reveal"><strong>Typography</strong><small>Hierarchy & pairing</small></div>
+    <div class="skill reveal"><strong>Vector</strong><small>Shape & illustration</small></div>
+    <div class="skill reveal"><strong>Illustrator</strong><small>Vector & branding</small></div>
+    <div class="skill reveal"><strong>Photoshop</strong><small>Image editing</small></div>
+    <div class="skill reveal"><strong>CapCut</strong><small>Video editing</small></div>
+    <div class="skill reveal"><strong>Alight Motion</strong><small>Motion graphic</small></div>
+  </div>
+</div>
+</section>
+
+<section id="projects">
+<div class="container">
+  <div class="section-head reveal">
+    <div><div class="eyebrow">03 — Selected Work</div><h2>Projects</h2></div>
+    <p>Klik project untuk membuka detail dan galeri karya.</p>
+  </div>
+
+  <div class="projects">
+    <article class="project reveal" data-project="alona">
+      <div class="project-img"><img src="images/aln lg.jpg" alt="ALONA branding"></div>
+      <div class="project-body">
+        <div class="project-top"><h3>ALONA</h3><span class="tag">BRANDING</span></div>
+        <p>Eksplorasi identitas visual dan branding untuk brand ALONA.</p>
+        <div class="project-meta"><span class="pill">Logo</span><span class="pill">Brand Identity</span><span class="pill">Layout</span></div>
+        <div class="project-detail-btn">Untuk melihat detail projek <span>→</span></div>
+      </div>
+    </article>
+
+    <article class="project reveal" data-project="poster">
+      <div class="project-img"><img src="images/ps2.jpg" alt="Poster Pray for Sumatra"></div>
+      <div class="project-body">
+        <div class="project-top"><h3>Poster Collection</h3><span class="tag">POSTER</span></div>
+        <p>Kumpulan eksplorasi poster dengan tema sosial, budaya, dan peringatan.</p>
+        <div class="project-meta"><span class="pill">Pray for Sumatra</span><span class="pill">Budaya</span><span class="pill">Peringatan</span></div>
+        <div class="project-detail-btn">Untuk melihat detail projek <span>→</span></div>
+      </div>
+    </article>
+
+    <article class="project reveal" data-project="jersey">
+      <div class="project-img"><img src="images/j1.jpg" alt="Jersey design"></div>
+      <div class="project-body">
+        <div class="project-top"><h3>Jersey Design</h3><span class="tag">APPAREL</span></div>
+        <p>Eksplorasi desain jersey dengan variasi warna, nomor, nama, dan tampilan depan-belakang.</p>
+        <div class="project-meta"><span class="pill">Sportswear</span><span class="pill">Mockup</span><span class="pill">Pattern</span></div>
+        <div class="project-detail-btn">Untuk melihat detail projek <span>→</span></div>
+      </div>
+    </article>
+
+    <article class="project reveal" data-project="packaging">
+      <div class="project-img"><img src="images/Packaging 3d.jpeg" alt="Packaging 3D"></div>
+      <div class="project-body">
+        <div class="project-top"><h3>Packaging</h3><span class="tag">PACKAGING</span></div>
+        <p>Eksplorasi desain kemasan dan visualisasi 3D untuk melihat hasil desain secara lebih nyata.</p>
+        <div class="project-meta"><span class="pill">Packaging</span><span class="pill">Mockup</span><span class="pill">3D Visual</span></div>
+        <div class="project-detail-btn">Untuk melihat detail projek <span>→</span></div>
+      </div>
+    </article>
+  </div>
+</div>
+</section>
+
+<section id="experience">
+<div class="container">
+  <div class="section-head reveal">
+    <div><div class="eyebrow">04 — Experience</div><h2>Experience</h2></div>
+  </div>
+  <div class="timeline">
+    <div class="t-item reveal">
+      <div class="t-dot"></div>
+      <h3>PKL — First One Jersey Factory Jember</h3>
+      <div class="date">2026</div>
+      <p>Melaksanakan kegiatan Praktik Kerja Lapangan dan mengembangkan pengalaman dalam proses desain serta produksi yang berkaitan dengan jersey dan kebutuhan visual.</p>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-dot"></div>
+      <h3>School Design Projects</h3>
+      <div class="date">2024 — 2026</div>
+      <p>Mengerjakan berbagai tugas dan proyek DKV seperti branding, poster, vector, layout, packaging, dan desain apparel.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+  <div class="contact-box reveal">
+    <div>
+      <div class="eyebrow">05 — Contact</div>
+      <h2 style="font-size:38px">Let's make something visual.</h2>
+      <p>Terbuka untuk diskusi, kolaborasi, dan kebutuhan desain.</p>
+    </div>
+    <div class="contact-links">
+      <a class="btn primary" href="https://wa.me/6285137861056" target="_blank">WhatsApp ↗</a>
+      <a class="btn" href="https://instagram.com/eky___24" target="_blank">Instagram ↗</a>
+      <a class="btn" href="mailto:sultaneky4@gmail.com">Email ↗</a>
+    </div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>© 2026 Sultan Eky Syahrudin — Portfolio DKV</footer>
+
+<div class="modal" id="projectModal">
+  <div class="modal-card">
+    <div class="modal-top">
+      <div>
+        <div class="eyebrow" id="modalTag">PROJECT</div>
+        <h2 id="modalTitle" style="font-size:32px">Project</h2>
+      </div>
+      <button id="modalClose" type="button">✕</button>
+    </div>
+    <div class="modal-content">
+      <p id="modalDesc"></p>
+      <div class="modal-gallery" id="modalGallery"></div>
+      <button class="btn modal-back" id="modalBack" type="button">← Kembali ke Projects</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   DATA FOTO PROJECT
+   Kalau mau mengganti foto project, ubah nama file di sini.
+   ========================================================= */
+const projects = {
+  alona: {
+    title:"ALONA",
+    tag:"BRANDING",
+    desc:"Eksplorasi identitas visual dan branding untuk ALONA.",
+    images:["aln lg.jpg","aln1.jpg","aln2.jpg","aln3.jpg"]
+  },
+  poster: {
+    title:"Poster Collection",
+    tag:"POSTER",
+    desc:"Kumpulan karya poster dengan beberapa tema visual.",
+    images:["ps2.jpg","ps1.jpg","ps3.jpg","ps4.jpg","ps5.jpg"]
+  },
+  jersey: {
+    title:"Jersey Design",
+    tag:"APPAREL",
+    desc:"Kumpulan eksplorasi desain jersey dan mockup apparel.",
+    images:["j1.jpg","j2.jpg","j3.jpg"]
+  },
+  packaging: {
+    title:"Packaging",
+    tag:"PACKAGING",
+    desc:"Eksplorasi desain packaging dan visualisasi 3D.",
+    images:["Packaging.jpeg","Packaging 3d.jpeg"]
+  }
+};
+
+const touchPhoto = document.getElementById("touchPhoto");
+const photoFront = document.getElementById("photoFront");
+let dragging = false;
+
+function revealPhoto(clientX){
+  const rect = touchPhoto.getBoundingClientRect();
+  let percent = ((clientX - rect.left) / rect.width) * 100;
+  percent = Math.max(0, Math.min(100, percent));
+  photoFront.style.clipPath = `inset(0 ${100-percent}% 0 0)`;
+  touchPhoto.classList.add("used");
+}
+touchPhoto.addEventListener("pointerdown", e=>{
+  dragging=true;
+  touchPhoto.setPointerCapture(e.pointerId);
+  revealPhoto(e.clientX);
+});
+touchPhoto.addEventListener("pointermove", e=>{
+  if(dragging) revealPhoto(e.clientX);
+});
+touchPhoto.addEventListener("pointerup",()=>dragging=false);
+touchPhoto.addEventListener("pointercancel",()=>dragging=false);
+touchPhoto.addEventListener("click",e=>revealPhoto(e.clientX));
+
+const modal=document.getElementById("projectModal");
+const modalTitle=document.getElementById("modalTitle");
+const modalTag=document.getElementById("modalTag");
+const modalDesc=document.getElementById("modalDesc");
+const modalGallery=document.getElementById("modalGallery");
+
+function openProject(key){
+  const p=projects[key];
+  modalTitle.textContent=p.title;
+  modalTag.textContent=p.tag;
+  modalDesc.textContent=p.desc;
+  modalGallery.innerHTML=p.images.map(img=>`
+    <img src="images/${img}" alt="${p.title}">
+  `).join("");
+  modal.classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeModal(){
+  modal.classList.remove("open");
+  document.body.style.overflow="";
+}
+document.querySelectorAll(".project").forEach(card=>{
+  card.addEventListener("click",()=>openProject(card.dataset.project));
+
+  const detailBtn = card.querySelector(".project-detail-btn");
+  detailBtn.addEventListener("click", (e)=>{
+    e.stopPropagation();
+    openProject(card.dataset.project);
+  });
+});
+document.getElementById("modalClose").addEventListener("click",closeModal);
+document.getElementById("modalBack").addEventListener("click",closeModal);
+modal.addEventListener("click",e=>{if(e.target===modal) closeModal();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape") closeModal();});
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")});
+},{threshold:.08});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
